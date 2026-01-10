@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f5f7fa;
             min-height: 100vh;
             padding: 20px;
         }
@@ -27,21 +27,24 @@
         header {
             background: white;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             margin-bottom: 30px;
             text-align: center;
+            border-top: 4px solid #1e40af;
         }
 
         h1 {
-            color: #333;
+            color: #1f2937;
             margin-bottom: 10px;
             font-size: 2.5em;
+            font-weight: 600;
         }
 
         .subtitle {
-            color: #666;
+            color: #6b7280;
             font-size: 1.1em;
+            font-weight: 400;
         }
 
         /* Statistics Section */
@@ -55,37 +58,39 @@
         .stat-card {
             background: white;
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #1e40af;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .stat-number {
             font-size: 2.5em;
             font-weight: bold;
-            color: #667eea;
+            color: #1e40af;
             margin: 10px 0;
         }
 
         .stat-label {
-            color: #666;
-            font-size: 1em;
+            color: #6b7280;
+            font-size: 0.95em;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: 500;
         }
 
         /* Controls Section */
         .controls {
             background: white;
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             margin-bottom: 30px;
             display: flex;
             flex-wrap: wrap;
@@ -105,62 +110,64 @@
         input[type="date"],
         select {
             padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
             font-size: 1em;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f9fafb;
         }
 
         input[type="text"]:focus,
         input[type="date"]:focus,
         select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #1e40af;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
         }
 
         button {
             padding: 10px 25px;
-            background: #667eea;
+            background: #1e40af;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 1em;
             font-weight: 600;
-            transition: background 0.3s ease, transform 0.2s ease;
+            transition: background 0.3s ease;
         }
 
         button:hover {
-            background: #764ba2;
-            transform: scale(1.05);
+            background: #1e3a8a;
         }
 
         button:active {
-            transform: scale(0.98);
+            opacity: 0.95;
         }
 
         .export-btn {
-            background: #10b981;
+            background: #047857;
         }
 
         .export-btn:hover {
-            background: #059669;
+            background: #065f46;
         }
 
         .clear-btn {
-            background: #ef4444;
+            background: #dc2626;
         }
 
         .clear-btn:hover {
-            background: #dc2626;
+            background: #b91c1c;
         }
 
         /* Table Section */
         .table-section {
             background: white;
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             overflow-x: auto;
         }
 
@@ -170,20 +177,21 @@
         }
 
         thead {
-            background: #f3f4f6;
+            background: #f9fafb;
         }
 
         th {
             padding: 15px;
             text-align: left;
             font-weight: 600;
-            color: #333;
-            border-bottom: 2px solid #ddd;
+            color: #1f2937;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         td {
             padding: 12px 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f3f4f6;
+            color: #374151;
         }
 
         tbody tr:hover {
@@ -193,19 +201,19 @@
         .status-badge {
             display: inline-block;
             padding: 5px 12px;
-            border-radius: 20px;
+            border-radius: 6px;
             font-size: 0.9em;
             font-weight: 600;
         }
 
         .status-present {
-            background: #d1fae5;
-            color: #065f46;
+            background: #dbeafe;
+            color: #1e40af;
         }
 
         .status-absent {
             background: #fee2e2;
-            color: #7f1d1d;
+            color: #991b1b;
         }
 
         .action-buttons {
@@ -214,19 +222,19 @@
         }
 
         .delete-btn {
-            background: #ef4444;
+            background: #dc2626;
             padding: 6px 12px;
             font-size: 0.85em;
         }
 
         .delete-btn:hover {
-            background: #dc2626;
+            background: #991b1b;
         }
 
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: #999;
+            color: #9ca3af;
         }
 
         .empty-state-icon {
@@ -261,11 +269,12 @@
             background-color: white;
             margin: 5% auto;
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 8px;
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: slideIn 0.3s ease;
+            border-top: 4px solid #1e40af;
         }
 
         @keyframes slideIn {
@@ -285,12 +294,13 @@
         }
 
         .modal-header h2 {
-            color: #333;
+            color: #1f2937;
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .close {
-            color: #aaa;
+            color: #d1d5db;
             float: right;
             font-size: 28px;
             font-weight: bold;
@@ -300,7 +310,7 @@
 
         .close:hover,
         .close:focus {
-            color: #000;
+            color: #1f2937;
         }
 
         .form-group {
@@ -310,7 +320,7 @@
         label {
             display: block;
             margin-bottom: 5px;
-            color: #333;
+            color: #1f2937;
             font-weight: 600;
         }
 
@@ -327,11 +337,11 @@
         }
 
         .btn-secondary {
-            background: #999;
+            background: #6b7280;
         }
 
         .btn-secondary:hover {
-            background: #777;
+            background: #4b5563;
         }
 
         /* Responsive */
@@ -397,7 +407,7 @@
     <div class="container">
         <!-- Header -->
         <header>
-            <h1>📊 Attendance Dashboard</h1>
+            <h1>Attendance Dashboard</h1>
             <p class="subtitle">Smart Attendance System</p>
         </header>
 
@@ -430,12 +440,12 @@
             <div class="filter-group">
                 <input type="date" id="dateFilter" placeholder="Filter by date">
                 <input type="text" id="personFilter" placeholder="Filter by person name">
-                <button onclick="applyFilters()">🔍 Filter</button>
+                <button onclick="applyFilters()">Filter</button>
                 <button class="clear-btn" onclick="clearFilters()">Clear</button>
             </div>
             <div style="display: flex; gap: 10px;">
-                <button onclick="openAddModal()">➕ Add Record</button>
-                <button class="export-btn" onclick="exportCSV()">📥 Export CSV</button>
+                <button onclick="openAddModal()">Add Record</button>
+                <button class="export-btn" onclick="exportCSV()">Export CSV</button>
             </div>
         </div>
 
@@ -466,7 +476,7 @@
                         </td>
                         <td>
                             <div class="action-buttons">
-                                <button class="delete-btn" onclick="deleteRecord(this)">🗑️ Delete</button>
+                                <button class="delete-btn" onclick="deleteRecord(this)">Delete</button>
                             </div>
                         </td>
                     </tr>
@@ -475,7 +485,7 @@
                     <tr>
                         <td colspan="5">
                             <div class="empty-state">
-                                <div class="empty-state-icon">📭</div>
+                                <div class="empty-state-icon">-</div>
                                 <p>No attendance records yet</p>
                             </div>
                         </td>
@@ -535,7 +545,7 @@
                         <tr>
                             <td colspan="5">
                                 <div class="empty-state">
-                                    <div class="empty-state-icon">📭</div>
+                                    <div class="empty-state-icon">-</div>
                                     <p>No attendance records yet</p>
                                 </div>
                             </td>
@@ -556,7 +566,7 @@
                         </td>
                         <td>
                             <div class="action-buttons">
-                                <button class="delete-btn" onclick="deleteRecord(this, ${index})">🗑️ Delete</button>
+                                <button class="delete-btn" onclick="deleteRecord(this, ${index})">Delete</button>
                             </div>
                         </td>
                     </tr>
