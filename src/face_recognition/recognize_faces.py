@@ -5,6 +5,16 @@ import pickle
 import os
 from datetime import datetime
 import sys
+import threading
+import tkinter as tk
+from tkinter import messagebox
+
+def show_popup(name):
+    """Run message box in a separate thread."""
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showinfo("Attendance", f"{name} has been marked as Present!")
+    root.destroy()
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from attendance.attendance_manager import AttendanceManager
@@ -136,13 +146,14 @@ class FaceRecognizer:
                 elif key == ord('m'):  # Mark attendance
                     for name, confidence in zip(face_names, confidences):
                         if name != "Unknown" and confidence > 0.6:
-                            self._mark_attendance(name)
-            
-            cap.release()
-            cv2.destroyAllWindows()
+                            marked = self._mark_attendance(name)
+                            if marked:
+                             cap.release()
+                             cv2.destroyAllWindows()
             
             print("\nAttendance Summary:")
             print(f"Marked attendance for: {', '.join(self.marked_today)}")
+            sys.exit(0)
             
         except Exception as e:
             print(f"Error in attendance mode: {e}")
@@ -191,11 +202,17 @@ class FaceRecognizer:
         try:
             if name not in self.marked_today:
                 success = self.attendance_manager.record_attendance(name, "Present")
+
                 if success:
                     self.marked_today.add(name)
                     print(f"Marked attendance for: {name}")
+                    
+                    threading.Thread(target=show_popup, args=(name,)).start()
+                    return True
                 else:
                     print(f"Could not mark attendance for {name} (already marked or error)")
+                    
         except Exception as e:
             print(f"Error marking attendance: {e}")
+            return False
 
