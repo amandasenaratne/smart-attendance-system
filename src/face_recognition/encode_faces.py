@@ -11,11 +11,6 @@ try:
     import face_recognition
 except ModuleNotFoundError as e:
     raise ModuleNotFoundError(
-        "face_recognition is not available in the Python environment you are running. "
-        "\n\nFix (Mac M-series recommended):"
-        "\n  1) conda activate attendance"
-        "\n  2) conda install -c conda-forge dlib face_recognition -y"
-        "\n\nThen run this script again using the same conda environment."
     ) from e
 
 
