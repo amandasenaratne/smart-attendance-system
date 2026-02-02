@@ -4,6 +4,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 import io
+import cv2
+import base64
+import numpy as np
 
 # Add parent directory to path to import from src
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -89,6 +92,66 @@ def record_attendance():
         return jsonify({'message': 'Attendance recorded successfully'}), 201
     else:
         return jsonify({'error': 'Could not record attendance (duplicate or error)'}), 400
+
+
+@app.route('/register-face', methods=['POST'])
+def register_face():
+    """API endpoint to register a new face."""
+    try:
+        data = request.get_json()
+        person_name = data.get('name')
+        image_data = data.get('image')
+        
+        if not person_name or not image_data:
+            return jsonify({'error': 'Name and image are required'}), 400
+        
+        # Create directory for person
+        faces_dir = os.path.join(os.path.dirname(__file__), '..', 'data', 'datasets', 'faces')
+        person_dir = os.path.join(faces_dir, person_name)
+        os.makedirs(person_dir, exist_ok=True)
+        
+        # Decode and save image
+        try:
+            # Remove data:image/jpeg;base64, prefix if present
+            if ',' in image_data:
+                image_data = image_data.split(',')[1]
+            
+            image_bytes = base64.b64decode(image_data)
+            nparr = np.frombuffer(image_bytes, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            
+            if img is None:
+                return jsonify({'error': 'Invalid image data'}), 400
+            
+            # Save image
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S_%f')
+            img_path = os.path.join(person_dir, f"{person_name}_{timestamp}.jpg")
+            cv2.imwrite(img_path, img)
+            
+            return jsonify({
+                'message': f'Face image captured for {person_name}',
+                'image_path': img_path
+            }), 201
+            
+        except Exception as e:
+            return jsonify({'error': f'Failed to process image: {str(e)}'}), 400
+        
+    except Exception as e:
+        return jsonify({'error': f'Registration error: {str(e)}'}), 500
+
+
+@app.route('/registered-people', methods=['GET'])
+def get_registered_people():
+    """Get list of registered people."""
+    try:
+        faces_dir = os.path.join(os.path.dirname(__file__), '..', 'data', 'datasets', 'faces')
+        if not os.path.exists(faces_dir):
+            return jsonify({'people': []}), 200
+        
+        people = [d for d in os.listdir(faces_dir) if os.path.isdir(os.path.join(faces_dir, d))]
+        return jsonify({'people': people}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 @app.route('/delete/<int:record_id>', methods=['DELETE'])
